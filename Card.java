@@ -1,3 +1,8 @@
+// Kathryn Annis 
+// CS 110A 
+// 4/27/2015
+// Assignment 10
+
 /**
    The Card class holds information for the values of the cards. 
 */ 
@@ -14,7 +19,7 @@ public class Card
    public static final int KING = 13; 
    public static final int QUEEN = 12;  
    public static final int JACK = 11;
-   // 10 = 10, 9=9, 8=8, 7=7, 6=6, 5=5, 4=4, 3=3, 2=2, 1=1. 
+   // 10 = 10, 9=9, 8=8, 7=7, 6=6, 5=5, 4=4, 3=3, 2=2 
    // The format  for a card will be a value XXX, the first X (left) being the suit indicator. 
    // If the value of the two following X's are larger, then that card wins. 
    
@@ -24,78 +29,43 @@ public class Card
    private int val;  
    
    /**
-      The Card constructor creates a new card object based off of strings  
-   */ 
-   public Card(String cS, String cR)
-   {
-      if (cS.equalsIgnoreCase("hearts"))
-         card = HEARTS; 
-      else if (cS.equalsIgnoreCase("spades"))
-         card = SPADES; 
-      else if (cS.equalsIgnoreCase("clubs"))
-         card = CLUBS; 
-      else if (cS.equalsIgnoreCase("diamonds"))
-         card = DIAMONDS; 
-      else 
-         System.exit(0); 
-      
-      if (cR.equalsIgnoreCase("ace"))
-         card = card + ACE; 
-      else if (cR.equalsIgnoreCase("king"))
-         card = card + KING; 
-      else if (cR.equalsIgnoreCase("queen"))
-         card = card + QUEEN; 
-      else if (cR.equalsIgnoreCase("jack"))
-         card = card + JACK; 
-      else  
-         val = Integer.parseInt(cR);                       
-         card = card + val;      
-   }
-   
-   /**
-      The Card constructor creates a new card object based off ints 
+      The Card constructor creates a new card object based off of ints  
+      @param cS the card Suit 
+      @param cR the card Rank  
    */ 
    public Card(int cS, int cR)
    {
-      if (cS == HEARTS)
-         card = HEARTS; 
-      else if (cS == SPADES)
-         card = SPADES; 
-      else if (cS == CLUBS)
-         card = CLUBS; 
-      else if (cS == DIAMONDS)
-         card = DIAMONDS; 
-      else 
-         System.exit(0); 
-      
-      if (cR == ACE)
-         card = card + ACE; 
-      else if (cR == KING)
-         card = card + KING; 
-      else if (cR == QUEEN)
-         card = card + QUEEN; 
-      else if (cR == JACK)
-         card = card + JACK; 
-      else                        
-         card = card + cR;
-   } 
+      suit = cS;
+      rank = cR; 
+   }   
    
    /**
       the getSuit method returns the value of the suit as an int
       @return suit The int value of the suit (ie 100,200,300,400)
    */ 
    public int getSuit()
-   {
-      if (card >= 400)
-         suit = 400; 
-      else if (card >= 300)
-         suit = 300; 
-      else if (card >= 200)
-         suit = 200; 
-      else 
-         suit = 100; 
-         
+   {  
       return suit;             
+   }
+   
+   /**
+      the suitString method returns the value of the suit as a string 
+      @return str the suit string 
+   */ 
+   public String suitString()
+   {
+      String str; 
+      if (suit == 100)
+         str = "Hearts";
+      else if (suit == 200)
+         str = "Spades";
+      else if (suit == 300)
+         str = "Clubs"; 
+      else if (suit == 400)
+         str = "Diamonds"; 
+      else 
+         str = "??";
+      return str;     
    }
    
    /**
@@ -104,8 +74,27 @@ public class Card
    */ 
    public int getRank()
    {
-      // not sure I need this
       return rank; 
+   } 
+   
+   /**
+      the rankString method returns the value of the rank as a string 
+      @return str the string value 
+   */
+   public String rankString()
+   {
+      String str; 
+      if (rank == 14)
+         str = "Ace";
+      else if (rank == 13)
+         str = "King";
+      else if (rank == 12)
+         str = "Queen";
+      else if (rank == 11)
+         str = "Jack"; 
+      else 
+         str = "" + rank; 
+      return str; 
    } 
    
    /**
@@ -114,6 +103,7 @@ public class Card
    */ 
    public int getCard()
    {
+      card = rank + suit; 
       return card; 
    } 
    /**
@@ -122,7 +112,7 @@ public class Card
    */ 
    public String toString()
    {
-      String str = "hi"; 
+      String str = rankString() + " of " + suitString(); 
       return str; 
    }
    
